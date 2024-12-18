@@ -1,0 +1,129 @@
+<div class="content-section">
+  <div class="search-and-add-button">
+    <div>
+      <!-- ngModel connect our input to filterText -->
+      <input class="search-bar-top" type="text" placeholder="Search by title" [(ngModel)]="filterText" />
+    </div>
+    <button *ngIf="userRole === 'hr'" type="button" class="btn btn-light addArticle" (click)="addArticle()">
+      Add Article
+    </button>
+    <!-- ngModel binds selectedCategory variable to the value in the dropdown -->
+    <!-- when the ngModelChange is triggered we will call the filter articles | seems we can also use a simple change instead  https://www.angularjswiki.com/angular/ngmodelchange-change-angular/#multiple-ngmodelchange-events  -->
+    <select [(ngModel)]="selectedCategory" (ngModelChange)="filterArticles()">
+      <option value="">All</option>
+      <option value="News">News</option>
+      <option value="HR Announcements">HR Announcements</option>
+      <option value="Policy Changes">Policy Changes</option>
+      <option value="Upcoming Events">Upcoming Events</option>
+      <option value="Training Opportunities">Training Opportunities</option>
+    </select>
+  </div>
+
+
+
+  <app-spinner></app-spinner>
+  <div class="container-articles">
+    <!-- is a for and gets all the articles one by one -->
+    <div *ngFor="
+          let article of filteredArticles
+            | paginate : { itemsPerPage: 5, currentPage: p }
+        ">
+      <div class="card">
+
+
+        <div class="coverpic">
+
+          <!-- Cover image can trigger update cover image if logged user is hr -->
+          <ng-template [ngIf]="userRole === 'hr'">
+            <img *ngIf="article.coverImageUrl else defaultCoverImage" [src]='article.coverImageUrl'
+              class="coverpic__image">
+
+            <ng-template #defaultCoverImage>
+              <img class="coverpic__image" src="assets/images/logo-white-on-blue.jpeg" alt="article cover image">
+            </ng-template>
+
+            <div class="coverpic__content">
+              <span class="coverpic__text" (click)="editCoverImage(article)">Change</span>
+            </div>
+          </ng-template>
+
+          <!-- Cover image cannot triger update cover image if logged user is not hr -->
+          <ng-template [ngIf]="userRole === 'employee'">
+            <img *ngIf="article.coverImageUrl else defaultCoverImage" [src]='article.coverImageUrl'
+             >
+
+            <ng-template #defaultCoverImage>
+              <img  src="assets/images/logo-white-on-blue.jpeg" alt="article cover image">
+            </ng-template>
+          </ng-template>
+
+        </div>
+
+
+        <div class="card-body">
+          <div class="top-of-card">
+            <div class="title-badge-container">
+              <h5 class="card-title">{{ article.title }}</h5>
+              <span class="badge badge-pill badge-danger">{{
+                article.contentType
+                }}</span>
+              <div class="date-of-article">
+                <p>Created on {{ article.createdDate | date:'dd/MM/yyyy' }}</p>
+              </div>
+            </div>
+          </div>
+          <p class="card-text">
+            {{ article.content }}
+          </p>
+          <div class="read-more-container">
+            <div *ngIf=" userRole === 'hr' " class="button-container">
+              <button type="button" class="btn btn-secondary" (click)="editArticle(article)">
+                Edit
+              </button>
+              <button type="button" class="btn btn-secondary delete" (click)="deleteArticle(article.id)">
+                Delete
+              </button>
+            </div>
+            <!-- routerLink - Angular specific - when clicked will navigate to the route in the brackets - for instance - article/1 , 1 being fetched in the backend  -->
+            <a [routerLink]="['/article', article.id]" class="btn btn-primary">Read more</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- paginator with ngx-paginator https://www.youtube.com/watch?v=qJ1UHAbGTWw&t=432s  + http://michaelbromley.github.io/ngx-pagination/#/-->
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+  <ng-template [ngIf]="modalCloseCause === 'coverImageUploadSuccess' || modalCloseCause==='coverImageEditSuccess'">
+    <div class="alert-container">
+      <div id='hideMe' class="alert alert-success" role="alert">
+        Cover image uploaded successfully !
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template [ngIf]="modalCloseCause === 'articleUpdateSuccess'">
+    <div class="alert-container">
+      <div id='hideMe' class="alert alert-success" role="alert">
+        Changes have been saved !
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template [ngIf]="modalCloseCause === 'articleAddSuccess'">
+    <div class="alert-container">
+      <div id='hideMe' class="alert alert-success" role="alert">
+        New article has been added !
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template [ngIf]="modalCloseCause === 'articleDeleteSuccess'">
+    <div class="alert-container">
+      <div id='hideMe' class="alert alert-danger" role="alert">
+        Article has been removed !
+      </div>
+    </div>
+  </ng-template>
+</div>

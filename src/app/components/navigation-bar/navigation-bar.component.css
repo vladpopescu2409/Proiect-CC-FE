@@ -1,0 +1,142 @@
+
+.navbar.navbar-expand-lg.navbar-light {
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr ;
+  height: 54px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 25px;
+  padding-right: 25px;
+ 
+}
+.brand-container{
+  display: flex;
+  
+}
+.navbar-brand {
+  width: 41px;
+  height: 41px;
+}
+.space-between-image-list {
+  width: 400px;
+}
+.nav-icon-and-text {
+ 
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-left: 5px;
+  margin-right: 5px;
+  width: 80px;
+  height: 52px;
+  justify-content: center;
+  padding-top: 5px;
+}
+.navbar {
+  background-color: #133c7f;
+  overflow: hidden;
+  overflow-y: hidden;
+}
+/* the text underneath the icon  */
+.nav-link {
+  color: white;
+  font-size: 10.5px;
+  padding: 0;
+  margin-top: -5px;
+  font-family: 'Raleway' ,Arial, Helvetica, sans-serif ;
+}
+.ng-fa-icon {
+  color: white;
+  border: 1px solid;
+}
+/* all the icons in the navbar */
+mat-icon {
+  width: 24px;
+  height: 24px;
+  color: white;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* the vertical separator */
+.vr {
+  align-self: stretch;
+  background-color: #f2f7fb;
+  width: 1px;
+}
+/* the dropdown  */
+#dropdownBasic1 {
+  color: white;
+  border: none;
+  text-decoration: none;
+  font-size: 11px;
+  z-index: 2;
+}
+/* change the button color when you hover over */
+#dropdownBasic1:hover {
+  background-color: #dce0dc;
+  color: rgb(144, 49, 49);
+}
+/* same as the nav-icon-and-text it is the box that captures all of them */
+/* .d-inline-block {
+  
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 80px;
+  height: 52px;
+  justify-content: center;
+} */
+
+/* the bar after the navbar brand */
+
+/* just the container of all the links with icons */
+.link-icons-on-the-navbar {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  grid-column-start: 2;
+  grid-column-end: 3;
+
+}
+/* the name of HR connect */
+.the-name-of-app {
+  color: white !important;
+  font-size: 17px !important;
+  margin-top: auto !important;
+  margin-bottom: auto;
+  font-family: 'Raleway' ,Arial, Helvetica, sans-serif ;
+  margin-left: -5px;
+  text-decoration: none !important;
+}
+.logout-area{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  grid-column-start: 3;
+  grid-column-end: 4;
+}
+.logout-text{
+ color:white;
+ margin-top: auto;
+ margin-bottom: auto;
+ margin-left: 30px;
+ 
+}
+.vr{
+  margin-right: 5px;
+  width: 1.5px;
+  height: 50px;
+  grid-column-start: 3;
+  grid-column-end: 4;
+}
+.btn-danger {
+  background-color: transparent;
+  border: none;
+  color: white; 
+}
+
+.btn-danger:hover {
+  background-color: white;
+  border:none;
+  color: inherit; /* optional: change to preferred color */
+}

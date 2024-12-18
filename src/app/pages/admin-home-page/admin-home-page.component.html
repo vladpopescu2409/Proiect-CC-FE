@@ -1,0 +1,13 @@
+<app-navigation-bar [userRole]="userRole"></app-navigation-bar>
+
+<!-- Deoarece am injectat AuthService in typescript-ul componentei admin-home-page, avem acces si putem verifica starea variabilei isLoggedIn, astfel putem afisa componenta admin-home-page exclusiv pentru utilizatorii logati. -->
+<div id="admin-home-page" *ngIf="authService.isLoggedIn$ | async">
+    <h1>Admin dashboard</h1> 
+    <app-admin-users-table></app-admin-users-table>
+</div>
+<!-- The async pipe is used here to subscribe to the isLoggedIn$ observable from the authService and handle its asynchronous value. It allows the template to automatically update whenever the value emitted by the observable changes. -->
+
+<!-- The purpose of using the dollar sign suffix is to provide a visual cue that reminds developers that a particular variable or property is an observable and should be treated as such. It helps to distinguish between regular variables and observables, making the code more readable and understandable.
+This convention is often used to indicate that the variable or property represents an observable or stream of values. -->
+
+<!-- isLoggedIn$ is an observable representing the state of whether a user is logged in or not. The dollar sign suffix in this case indicates that it is an observable stream rather than a simple boolean value. -->

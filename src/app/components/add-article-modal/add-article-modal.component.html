@@ -1,0 +1,51 @@
+<div class="modal glass">
+  <div class="form-div glass">
+    <div id="particles-js"></div>
+
+    <span class="close" (click)="closeModal()">&times;</span>
+
+
+    <div class="title" *ngIf="data.coverImageState==='editCoverImage'; else AddEditArticleTitle">Upload cover image</div>
+    <ng-template #AddEditArticleTitle>
+      <div class="title">Add/Edit article</div>
+    </ng-template>
+
+
+
+    <input *ngIf="data.coverImageState==='editCoverImage'; else AddEditArticle" type="file"
+      (change)="onImageSelected($event)" accept="image/*">
+
+ 
+
+    <ng-template #AddEditArticle>
+
+
+      <div class="input-container ic1">
+        <input class="input" type="text" [(ngModel)]="data.title" placeholder="Title" maxlength="80"/>
+      </div>
+  
+      <div class="input-container ic1">
+        <textarea class="input content" matInput [(ngModel)]="data.content" placeholder="Content"></textarea>
+      </div>
+  
+      <div class="input-container ic1">
+        <select class="input" required [(ngModel)]="data.contentType">
+          <option disabled selected value="">Select a category of article</option>
+          <option value="News">News</option>
+          <option value="HR Announcements">HR Announcements</option>
+          <option value="Policy Changes">Policy Changes</option>
+          <option value="Upcoming Events">Upcoming Events</option>
+          <option value="Training Opportunities">Training Opportunities</option>
+        </select>
+      </div>
+
+    </ng-template>
+
+    
+
+    <div class="modal__buttons">
+      <button class="submit" (click)="saveArticle()">Save</button>
+    </div>
+
+  </div>
+</div>

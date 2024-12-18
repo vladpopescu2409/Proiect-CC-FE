@@ -1,0 +1,71 @@
+<!-- The Modal -->
+<div class="modal glass">
+ <!-- Modal content -->
+ <div class="form-div glass">
+  <div id="particles-js"></div>
+ <span class="close" (click)="closeModal()">&times;</span>
+        <!-- Butonul de ascundere formular. La evenimentul click se apeleaza functia closeModal() a componentei curente  si modala se va inchide-->
+
+
+        <div class="title" *ngIf="data.documentState==='editPDF'; else AddEditFAQTitle">Upload document</div>
+        <ng-template #AddEditFAQTitle>
+          <div class="title">Add/Edit FAQ</div>
+        </ng-template>
+        
+  <div class="form-grid">
+
+    <input *ngIf="data.documentState==='editPDF'; else EditFAQ" type="file"
+    (change)="onPDFSelected($event)">
+    
+    <ng-template #EditFAQ>
+      
+      <div class="input-container ic1">
+        <input class="input" matInput [(ngModel)]="data.title" placeholder="Title" />
+      </div>
+      
+      <div class="input-container ic1">
+        <select class="input"  matNativeControl required [(ngModel)]="data.category" placeholder="Category">
+          <option value="" disabled>Select a Category</option>
+          <option value="Important_HR_announcement">Payroll and Compensation"</option>
+          <option value="Upcoming_events">Performance</option>
+          <option value="Policy_changes">Time Off and Leave</option>
+          <option value="Training_opportunities">Training and Development</option>
+          <option value="News">Workplace Safety</option>
+        </select>
+      </div>
+  
+      <div class="input-container ic1">
+        <textarea class="input content"
+          matInput
+          [(ngModel)]="data.content"
+          
+          placeholder="Content"
+        ></textarea>
+      </div>
+  
+    </ng-template>
+    
+
+  
+
+ 
+ 
+    <button
+    class="submit"
+   
+    cdkFocusInitial
+    (click)="saveArticle()"
+  >
+    Save
+  </button>
+
+
+ 
+  
+  
+    
+  
+  
+</div>
+</div>
+</div>

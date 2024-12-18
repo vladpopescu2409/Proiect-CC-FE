@@ -1,0 +1,15 @@
+<div class="buttons-container">
+    
+    <ng-template [ngIf]="page==='admin'">
+        <button type="button" class="btn btn-edit" (click)="editUser()">Edit</button>
+        <button type="button" class="btn btn-danger" (click)="deleteUser()">Archive</button>
+    </ng-template> 
+    <ng-template [ngIf]="page==='profile'">
+        <button type="button" class="btn btn-danger" (click)="logout()">Logout</button>
+    </ng-template>
+</div>
+
+
+
+
+

@@ -1,0 +1,109 @@
+.users-table-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    
+}
+
+.search-and-add-container{
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+.search-bar {
+    height: 37px !important;
+    width: 16% !important;
+    border: 1px solid lightgrey !important;
+}
+
+.mdc-data-table__header-cell{
+    font-size:20px;
+    font-weight: bolder;
+}
+
+.btn-add{
+    background-color: #133C7F;
+    color:white;
+    font-weight: bolder !important;
+}
+
+th {
+    background-color: #2282C1;
+}
+
+.mdc-data-table__cell{
+    font-size:15px !important;
+    /* font-weight: bolder; */
+}
+
+
+.table{
+    border: 1px solid lightgrey !important;
+}
+
+.mat-mdc-header-cell{
+    background-color: #DDECF6 !important;
+}
+
+
+.mat-mdc-row .mat-mdc-cell {
+    border-top: 1px solid #dee2e6;
+    border-bottom: 1px solid transparent;
+    cursor: pointer;
+}
+
+.mat-mdc-row:hover .mat-mdc-cell {
+    border-color: black;
+    background-color: #ebeaea;
+}
+
+th.mat-sort-header-sorted {
+    color: black;
+}
+
+.mat-mdc-paginator-container {
+    background-color: #F2F7FB;
+}
+
+.mat-mdc-text-field-wrapper{
+    background-color: white;
+}
+
+#hideMe {
+    -moz-animation: cssAnimation 0s ease-in 5s forwards;
+    
+    -webkit-animation: cssAnimation 0s ease-in 5s forwards;
+    
+    -o-animation: cssAnimation 0s ease-in 5s forwards;
+    
+    animation: cssAnimation 0s ease-in 5s forwards;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    opacity:1;
+    transition:opacity 500ms;
+}
+@keyframes cssAnimation {
+    to {
+        opacity: 0;
+      
+    }
+}
+@-webkit-keyframes cssAnimation {
+    to {
+        opacity: 0;
+    }
+}
+
+.alert-container{
+    position: absolute;
+    top: 0;
+}
+
+.alert {
+    font-size: 20px !important;
+    font-weight: bold !important;
+}

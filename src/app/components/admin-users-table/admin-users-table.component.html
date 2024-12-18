@@ -1,0 +1,123 @@
+<!-- Cu functia ngIf verificam variabila isLoading. Aceasta variabila incepe cu valoarea true, iar apoi este schimbata in false la sfarsitul setului de instructiuni. -->
+<ng-template [ngIf]="isLoading" [ngIfElse]="displayList">
+    <app-spinner></app-spinner>
+</ng-template>
+
+<ng-template #displayList>
+
+    <div class="users-table-div">
+
+        <div class="search-and-add-container">
+            <input matInput [formControl]="searchControl" (keyup)="applyFilter($event)" placeholder="Search"
+                class="search-bar" #input>
+
+            <button type="button" class="btn btn-add" (click)="openModal()">Add user</button>
+            <!-- Butonul de adaugat users. La evenimentul click se apeleaza functia openModal() din componenta curenta (admin-home-page) si se afiseaza pe ecran formularul de adaugare -->
+        </div>
+
+        <table mat-table [dataSource]="dataSource" matSort class="table table-hover">
+
+            <!-- ID Column -->
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by ID">ID</th>
+                <td mat-cell *matCellDef="let element">{{element.id}}</td>
+            </ng-container>
+
+            <!-- Department Column -->
+            <ng-container matColumnDef="department">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by department">
+                    Department
+                </th>
+                <td mat-cell *matCellDef="let element">{{element.department.replace('_',' ')}}</td>
+            </ng-container>
+
+            <!-- Function Column -->
+            <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by position">Position
+                </th>
+                <td mat-cell *matCellDef="let element">{{element.position.replace('_',' ')}}</td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="lastName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">Name
+                </th>
+                <td mat-cell *matCellDef="let element">{{element.lastName}} {{element.firstName}}</td>
+            </ng-container>
+
+            <!-- E-mail Column -->
+            <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef>E-mail</th>
+                <td mat-cell *matCellDef="let element">{{element.loginDetails.email}}</td>
+            </ng-container>
+
+            <!-- Phone number Column -->
+            <ng-container matColumnDef="phoneNumber">
+                <th mat-header-cell *matHeaderCellDef>Phone number</th>
+                <td mat-cell *matCellDef="let element">{{element.phoneNumber}}</td>
+            </ng-container>
+
+            <!-- Join date Column -->
+            <ng-container matColumnDef="joinDate">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by first join date">
+                    Join date</th>
+                <td mat-cell *matCellDef="let element">{{element.joinDate}}</td>
+            </ng-container>
+
+            <!-- Role Column -->
+            <ng-container matColumnDef="role">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by first role">
+                    Role</th>
+                <td mat-cell *matCellDef="let element">{{element.loginDetails.role}}</td>
+            </ng-container>
+
+            <!-- Action Column -->
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef>Action</th>
+                <td mat-cell *matCellDef="let user">
+                    <app-user [user]="user" [page]="'admin'" (newGetUsersEvent)="getUsers()" (actionStateChange)="handleActionStateChange($event)"
+                        (newEditUserEvent)="editUser($event)"></app-user>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+            <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[20,10,50,100]" showFirstLastButtons>
+        </mat-paginator>
+        <!-- Here, we bind the pageSize and pageIndex properties of the MatPaginator to the corresponding properties of the dataSource.paginator. We also set a default value of 20 for the pageSize in case the paginator object is null or undefined. -->
+    
+        <ng-template [ngIf]="actionState === 'successAddUser'">
+            <div class="alert-container">
+                <div id='hideMe' class="alert alert-success" role="alert">
+                    User added successfully !
+                </div>
+            </div>
+        </ng-template>
+
+        <ng-template [ngIf]="actionState === 'success'">
+            <div class="alert-container">
+                <div id='hideMe'  class="alert alert-success" role="alert">
+                    Changes have been saved !
+                </div>
+            </div>
+        </ng-template>
+
+        <ng-template [ngIf]="actionState === 'userArchived'">
+            <div class="alert-container">
+                <div id='hideMe'  class="alert alert-danger" role="alert">
+                    User has been archived !
+                </div>
+            </div>
+        </ng-template>
+    
+    
+    
+    </div>
+
+</ng-template>
+
+<app-add-user-modal *ngIf="isModalOpen" [editedUser]="editedUser" [modalType]="modalType" [modalRole]="modalRole"
+    (actionStateChange)="handleActionStateChange($event)" (newCloseModalEvent)="closeModal()"
+    (newGetUsersEvent)="getUsers()"></app-add-user-modal>
+<!-- Evenimentul newCloseModalEvent este emis din componenta copil add-user-modal si este receptionat de catre componenta parinte admin-home-page, care apeleaza functia proprie closeModal() si ascunde la loc formularul de adaugare utilizatori. -->

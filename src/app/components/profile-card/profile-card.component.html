@@ -1,0 +1,144 @@
+<div class="container">
+    <div class="main-body">
+        <div *ngIf="userProfile" class="row gutters-sm">
+
+            <!-- LEFT COLUMN -->
+            <div class="left-column">
+                <div class="left-card">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-center text-center">
+
+                            <div class="profilepic">
+
+                                <img *ngIf="loadedProfileImage; else defaultProfilePicture" [src]="loadedProfileImage"
+                                    class="profilepic__image" width="150" height="150" alt="profile picture" />
+                                <ng-template #defaultProfilePicture><img
+                                        src="https://www.freeiconspng.com/thumbs/profile-icon-png/am-a-19-year-old-multimedia-artist-student-from-manila--21.png"
+                                        alt="default-profile-picture" class="profilepic__image" width="155"
+                                        height="155"></ng-template>
+
+                                <div class="profilepic__content">
+                                    <span class="profilepic__text"
+                                        (click)="editProfilePicture(userProfile)">Change</span>
+                                </div>
+
+                            </div>
+                            <!-- Needs to be sqaure to obtain a circle icon, otherwise the icon will be oval -->
+
+
+                            <div class="mt-3">
+                                <!-- In Bootstrap, the class names that start with m refer to margin, and the class names that start with t refer to the top margin specifically. The number 3 in mt-3 represents the magnitude of the margin spacing.For example, mt-3 adds a margin-top spacing of 1rem (or 16 pixels) to the <div> element, pushing it down from the element above it. You can adjust the spacing size by changing the number in the class. -->
+                                <h4>{{userProfile.lastName}} {{userProfile.firstName}}</h4>
+                                <h6>{{userProfile.position.replace('_',' ')}}</h6>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN -->
+            <div class="col-md-8">
+                <!-- The class="col-md-8" is also a Bootstrap class used for creating responsive column layouts.
+                In Bootstrap, the grid system is divided into 12 columns. The col-md-8 class indicates that the element should occupy 8 columns out of 12 in a medium-sized viewport (usually for devices with a width equal to or greater than 768 pixels). This means the element will take up approximately two-thirds of the available width. 
+            
+                Bootstrap provides different viewport breakpoints to define responsive behavior for different screen sizes. These breakpoints are defined based on common device categories such as extra small (xs), small (sm), medium (md), large (lg), and extra large (xl). The sizes are based on typical device widths, but keep in mind that the actual screen sizes may vary across devices.-->
+                <div class="card mb-3">
+                    <!-- In Bootstrap, the card class is used to create a container for displaying content in a card-like format. It provides a structured layout with a header, body, and footer sections. The card class sets the basic styling and structure for the card component.
+                    mb = margin-bottom -->
+                    <div class="card-body right-card">
+                        <!-- By applying the card-body class to a <div> element within a card, you create a designated area for the card's content. The card-body class sets the appropriate padding and styles to ensure the content is visually separated from other card components, such as the header or footer. -->
+
+                        <div class="row">
+                            <div class="col-sm-3 text-secondary"> <!-- occupy 3 columns -->
+                                <h6 class="mb-0">Department</h6>
+                            </div>
+                            <ng-container *ngFor="let role of ['employee', 'hr', 'admin']">
+                                <div *appHasRole="role" class="col-sm-9">
+                                    {{ userProfile.department.replace('_',' ') }}
+                                </div>
+                            </ng-container>
+                        </div>
+                        <hr>
+
+                        <div class="row">
+                            <div class="col-sm-3 text-secondary">
+                                <h6 class="mb-0">Email</h6>
+                            </div>
+                            <div class="col-sm-9">
+                                {{userProfile.loginDetails?.email}}
+                            </div>
+                        </div>
+                        <hr>
+
+                        <div class="row">
+                            <div class="col-sm-3 text-secondary">
+                                <h6 class="mb-0">Phone</h6>
+                            </div>
+                            <div class="col-sm-9 editable-field">
+                                {{userProfile.phoneNumber}}
+
+                                <a (click)="editPhoneNumber(userProfile)"><u>change</u></a>
+                            </div>
+                        </div>
+                        <hr>
+
+                        <div class="row">
+                            <div class="col-sm-3 text-secondary"> <!-- occupy 3 columns -->
+                                <h6 class="mb-0">Password</h6>
+                            </div>
+
+                            <div class="col-sm-9 editable-field">
+                                <b>*********</b>
+
+                                <a (click)="editPassword(userProfile)"><u>change</u></a>
+                            </div>
+
+                        </div>
+                        <hr>
+
+                        <!-- TO DELETE -->
+                        <!-- <div class="row">
+                            <div class="col-sm-3 text-secondary"> 
+                                <h6 class="mb-0">Role</h6>
+                            </div>
+                            <ng-container *ngFor="let role of ['employee', 'hr', 'admin']">
+                                <div *appHasRole="role" class="col-sm-9">
+                                    {{ role.toUpperCase() }}
+                                </div>
+                            </ng-container>
+                        </div>
+                        <hr> -->
+
+                        <div class="action-buttons-container">
+                            <app-user [user]="userProfile" [page]="'profile'" (newGetUsersEvent)="getUser()"></app-user>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+            <app-add-user-modal *ngIf="isModalOpen" [editedUser]="editedUser" [modalType]="modalType"
+                (actionStateChange)="handleActionStateChange($event)" [modalRole]="modalRole"
+                (newCloseModalEvent)="closeModal()" (newGetUsersEvent)="getUser()">
+            </app-add-user-modal>
+
+
+
+
+        </div>
+
+
+    </div>
+
+    <ng-template [ngIf]="actionState === 'success'">
+        <div class="alert-container">
+            <div id='hideMe' class="alert alert-success" role="alert">
+                Changes have been saved!
+            </div>
+        </div>
+    </ng-template>
+
+</div>

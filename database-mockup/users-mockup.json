@@ -1,0 +1,84 @@
+{
+  "users": [
+    {
+      "id": 2,
+      "department": "HRC",
+      "function": "Frontend developer",
+      "role": "employee",
+      "name": "Tudor",
+      "email": "tudor3@gmail.com",
+      "phone": "0722",
+      "password": "1234"
+    },
+    {
+      "id": 4,
+      "department": "HRC",
+      "function": "Backend developer",
+      "role": "employee",
+      "name": "testempl-name",
+      "email": "testempl",
+      "phone": "074587648",
+      "password": "testempl"
+    },
+    {
+      "department": "HR-HRC",
+      "function": "Head of Human Resources",
+      "role": "hr",
+      "name": "hr-name",
+      "email": "testhr",
+      "phone": "0789123654",
+      "password": "testhr",
+      "id": 5
+    },
+    {
+      "department": "A-HRC",
+      "function": "Head of Administration",
+      "role": "admin",
+      "name": "admin-name",
+      "email": "testadm",
+      "phone": "0755756855",
+      "password": "testadm",
+      "id": 6
+    },
+    {
+      "id": 7,
+      "department": "HRCC",
+      "function": "Frontend developerr",
+      "role": "employeee",
+      "name": "mihai",
+      "email": "mihai3@yahoo.com",
+      "phone": "0733",
+      "password": "1234"
+    },
+    {
+      "department": "HRC",
+      "function": "Backend dev",
+      "role": "test",
+      "name": "Johnny",
+      "email": "johnnytest@yahopo.ro",
+      "phone": "0789212",
+      "password": "123",
+      "id": 8
+    },
+    {
+      "id": 9,
+      "department": "wqewq",
+      "function": "ewqeq",
+      "role": "employee",
+      "name": "wqeq",
+      "email": "ewq@dsda.ro",
+      "phone": "4434342332",
+      "password": "3211"
+    },
+    {
+      "id": 10,
+      "department": "dasdas",
+      "function": "dasdass",
+      "role": "employee",
+      "name": "dasdaa",
+      "email": "d@d.ro",
+      "phone": "11111111111",
+      "password": "{{style=\"background:black;\"}}"
+    }
+  ]
+}

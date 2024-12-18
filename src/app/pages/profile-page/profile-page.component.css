@@ -1,0 +1,10 @@
+#profile-page{
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    background-color: #F2F7FB;
+    position: relative;
+    overflow: auto;
+
+
+}

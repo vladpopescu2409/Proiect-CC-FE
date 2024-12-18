@@ -1,0 +1,153 @@
+/* container of all the elements */
+.search-and-accordion-container {
+  width: 1100px;
+  padding-top: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  /* percentage that fills the viewpoint*/
+  margin: 1000px auto;
+  margin-bottom: 500px !important;
+  margin-top: 0px;
+}
+
+.search-and-add-button{
+  display: flex;
+  height: 34px;
+  margin-bottom:20px;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.form-control {
+  margin-bottom: 30px;
+}
+
+.accordion-body {
+  word-wrap: break-word;
+  padding: 10px;
+
+}
+
+.button-container{
+  padding-bottom: 5px;
+  padding-right:5px;
+  text-align:end;
+}
+
+/* the buttons that are anchors to their category */
+.btn-group {
+  width: 1100px;
+  margin-bottom: 10px;
+  margin-top: -10px;
+  font-family: 'Opens Sans', Arial, Helvetica, sans-serif;
+}
+
+.btn.btn-primary {
+  background-color: #929498;
+  border-color: #f8f9f9; 
+
+}
+
+/* add faq button */
+.addFaq {
+  background-color: #133C7F;
+  color:white;
+  font-weight: bolder !important;
+  height: 100%;
+}
+
+/* title of category */
+.category-title {
+  margin-bottom: 20px;
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: 'Opens Sans', Arial, Helvetica, sans-serif;
+}
+
+#myInput{
+  height: 34px;
+  width:300%;
+  margin: 0 !important;
+}
+
+/* both buttons of edit and delete */
+.btn-secondary {
+  width: 70px;
+  border: none;
+  background-color: #6c757d;
+}
+
+/* delete button */
+.delete {
+  margin-left: 5px;
+  background-color: #f45454;
+}
+
+.upload-pdf {
+  width:150px;
+  margin-left: 5px;
+  background-color: #73b772;
+}
+
+/* the faq title */
+.faq-header {
+  font-family: 'Opens Sans', Arial, Helvetica, sans-serif;
+  font-size: 36px;
+  margin-bottom: 10px;
+
+}
+
+/* text after FAQ */
+.introduction-text {
+  font-family: 'PT Sans', Arial, Helvetica, sans-serif;
+}
+
+/* the header of the accordion */
+.accordion-button {
+  font-size: 18px;
+  font-family: 'PT Sans', Arial, Helvetica, sans-serif;
+}
+
+
+
+
+
+
+
+#hideMe {
+  -moz-animation: cssAnimation 0s ease-in 5s forwards;
+  
+  -webkit-animation: cssAnimation 0s ease-in 5s forwards;
+  
+  -o-animation: cssAnimation 0s ease-in 5s forwards;
+  
+  animation: cssAnimation 0s ease-in 5s forwards;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  opacity:1;
+  transition:opacity 500ms;
+}
+@keyframes cssAnimation {
+  to {
+      opacity: 0;
+    
+  }
+}
+@-webkit-keyframes cssAnimation {
+  to {
+      opacity: 0;
+  }
+}
+
+.alert-container{
+  position: absolute;
+  top: 0;
+}
+
+.alert {
+  font-size: 20px !important;
+  font-weight: bold !important;
+}

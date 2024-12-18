@@ -1,0 +1,242 @@
+/*v--PROFILE--v*/
+.container {
+    overflow: hidden;
+}
+
+.main-body {
+    padding: 15px;
+    margin-top: 50px;
+    overflow: hidden;
+    font-weight: bold;
+}
+
+.card {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
+    height: 100%;
+}
+
+.card-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1rem;
+}
+
+.action-buttons-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+.gutters-sm {
+    margin-right: -8px;
+    margin-left: -8px;
+    padding-top: 55px;
+}
+
+.gutters-sm>.col,
+.gutters-sm>[class*=col-] {
+    padding-right: 8px;
+    padding-left: 8px;
+}
+
+.mb-3,
+.my-3 {
+    margin-bottom: 1rem !important;
+}
+
+.bg-gray-300 {
+    background-color: #e2e8f0;
+}
+
+.h-100 {
+    height: 100% !important;
+}
+
+.shadow-none {
+    box-shadow: none !important;
+}
+
+.left-column {
+    width: 25%;
+}
+
+
+
+.left-card {
+    /* card */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+
+    background-clip: border-box;
+    border: none;
+    border-radius: .25rem;
+}
+
+
+.profile-buttons {
+    text-align: right;
+}
+
+
+
+.profile-picture-container {
+    position: relative;
+
+    width: 150px;
+    /* Set the width of the container div */
+    height: 150px;
+    /* Set the height of the container div */
+    border-radius: 50%;
+    /* Make the container div a circle */
+
+    /* Center the image vertically and horizontally */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    /* Hide any overflow from the image */
+
+    overflow: hidden;
+    background-color: #111;
+}
+
+.profile-picture {
+    max-width: 100%;
+    /* Set the maximum width of the image to 100% of the container */
+    max-height: 100%;
+    /* Set the maximum height of the image to 100% of the container */
+    border-radius: 50%;
+    /* Make the image a circle */
+
+    /* Center the image within the container */
+    display: block;
+    margin: auto;
+}
+
+@media (max-width: 1000px) {
+    .profile-picture-circle {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+@media (max-width: 560px) {
+    .profile-picture-circle {
+        width: 70px;
+        height: 70px;
+    }
+}
+
+a,
+a label {
+    cursor: pointer;
+}
+
+.editable-field {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.profilepic {
+    position: relative;
+    width: 150px;
+    /* Set the width of the container div */
+    height: 150px;
+    /* Set the height of the container div */
+    border-radius: 50%;
+
+    /* Center the image vertically and horizontally */
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+
+    overflow: hidden;
+    background-color: #111;
+}
+
+.profilepic:hover .profilepic__content {
+    opacity: 1;
+}
+
+.profilepic:hover .profilepic__image {
+    opacity: .5;
+}
+
+.profilepic__image {
+    object-fit: cover;
+    opacity: 1;
+    transition: opacity .2s ease-in-out;
+}
+
+.profilepic__content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    opacity: 0;
+    transition: opacity .2s ease-in-out;
+}
+
+
+.profilepic__text {
+    text-transform: uppercase;
+    font-size: 12px;
+    width: 50%;
+    text-align: center;
+
+    cursor:pointer;
+}
+
+#hideMe {
+    -moz-animation: cssAnimation 0s ease-in 5s forwards;
+    
+    -webkit-animation: cssAnimation 0s ease-in 5s forwards;
+    
+    -o-animation: cssAnimation 0s ease-in 5s forwards;
+    
+    animation: cssAnimation 0s ease-in 5s forwards;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    opacity:1;
+    transition:opacity 500ms;
+}
+@keyframes cssAnimation {
+    to {
+        opacity: 0;
+      
+    }
+}
+@-webkit-keyframes cssAnimation {
+    to {
+        opacity: 0;
+    }
+}
+
+.alert-container{
+    position: absolute;
+    top: 0;
+    left: 44%;
+}
+
+.alert {
+    font-size: 20px !important;
+    font-weight: bold !important;
+}
+
+h4, h6 {
+    font-weight: bold !important;
+}
+
+
+
+

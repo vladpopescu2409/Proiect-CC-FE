@@ -1,0 +1,326 @@
+<!-- The Modal -->
+<div class="modal glass">
+    <!-- Modal content -->
+    <div class="form-div glass">
+        <div id="particles-js"></div>
+        <span class="close" (click)="closeModal()">&times;</span>
+        <!-- Butonul de ascundere formular. La evenimentul click se apeleaza functia closeModal() a componentei curente (add-user-modal) si modala se va inchide-->
+
+
+        <!-- Aceasta modala poate fi accesata din 4 locuri:
+        - De catre admin, de pe pagina de admin, apasand pe 'Add user'. Caz in care se vor afisa toate campurile posibile pt un utilizator, necompletate.
+        - De catre admin, de pe pagina de admin, apasand pe 'Details' din dreptul fiecarui user din tabel. Caz in care se vor afisa toate campurile posibile pt un utilizator, deja completate cu datele existente.
+        - De catre employee, de pe pagina de profil, apasand butonul de change din dreptul campului phone number. Caz in care se va afisa doar 1 camp: phone number, completat cu numarul de telefon al utilizatorului logat.
+        - De catre employee, de pe pagina de profil, apasnd butonul de change din dreptul campului password Caz in care se va afisa doar 1 camp: password, necompletat. -->
+
+        <!-- Titlul difera in functie de sursa deschiderii modalei -->
+        <ng-container *ngIf="modalType === 'editModalType'; else addModalType">
+            <div class="title" *ngIf="modalRole === 'editPhoneNumber'">Change phone number</div>
+            <div class="title" *ngIf="modalRole === 'editPassword'">Change password</div>
+            <div class="title" *ngIf="modalRole === 'admin'">Edit Account</div>
+        </ng-container>
+        <ng-template #addModalType>
+            <div class="title">Add new user</div>
+        </ng-template>
+
+
+
+        <form [formGroup]="userForm" autocomplete="off" class="form-grid">
+            <!-- Specificam numele formularului din typescript -->
+
+
+            <ng-template [ngIf]="modalRole==='admin'">
+                <!-- Campurile care se incarca daca modala e deschisa de admin -->
+
+                <!-- User details ==============================================================-->
+                <div class="user-details-container">
+                    <h3 class="subtitle">User details</h3>
+
+                    <div class="input-container ic1">
+                        <select id="role" class="input" name="role" formControlName="role" (change)="onRoleChange()">
+                            <option disabled selected value="">Select a role</option>
+                            <option *ngFor="let role of roles" [value]="role">{{ role.replace('_',' ') }}</option>
+                        </select>
+
+                        <label for="role" class="placeholder">Role:</label>
+                    </div>
+                    <div *ngIf="errorSource === 'role'" class="alert alert-danger" role="alert">
+                        {{ errorMessage }}
+                    </div>
+
+                    <div class="input-container ic2">
+                        <select id="department" class="input" name="department" formControlName="department"
+                            (change)="onDepartmentChange()">
+                            <option disabled selected value="">Select a department</option>
+                            <option *ngFor="let department of departments" [value]="department">{{
+                                department.replace('_',' ') }}</option>
+                        </select>
+
+                        <label for="department" class="placeholder">Department:</label>
+                    </div>
+                    <div *ngIf="errorSource === 'department'" class="alert alert-danger" role="alert">
+                        {{ errorMessage }}
+                    </div>
+
+                    <div class="input-container ic2">
+                        <select id="position" class="input" name="position" formControlName="position"
+                            (change)="onPositionChange()">
+                            <option disabled selected value="">Select a position</option>
+                            <option *ngFor="let position of positions" [value]="position">{{ position.replace('_',' ')
+                                }}</option>
+                        </select>
+
+                        <label for="position" class="placeholder">Position:</label>
+                    </div>
+                    <div *ngIf="errorSource === 'position'" class="alert alert-danger" role="alert">
+                        {{ errorMessage }}
+                    </div>
+
+                    <div class="input-container ic2">
+                        <input id="password" class="input" type="text" formControlName="password" placeholder=" "
+                            maxlength="60">
+                        <label for="password" class="placeholder">Password:</label>
+                    </div>
+                    <div *ngIf="errorSource === 'password'" class="alert alert-danger" role="alert">
+                        {{ errorMessage }}
+                    </div>
+                </div>
+
+                <!-- Contact ===================================================================-->
+                <div class="contact-container">
+                    <h3 class="subtitle">Contact</h3>
+
+                    <div class="input-container ic1">
+                        <input id="email" class="input" type="email" formControlName="email" placeholder=" " required
+                            maxlength="60">
+                        <!--<div class="cut"></div>-->
+
+                        <label for="email" class="placeholder">E-mail:</label>
+                    </div>
+                    <div *ngIf="errorSource === 'email'" class="alert alert-danger" role="alert">
+                        {{ errorMessage }}
+                    </div>
+
+                    <div class="input-container ic2">
+                        <input id="phoneNumber" class="input" type="text" formControlName="phoneNumber" placeholder=" "
+                            required maxlength="10">
+                        <label for="phone" class="placeholder">Phone number:</label>
+                    </div>
+                    <div *ngIf="errorSource === 'phone'" class="alert alert-danger" role="alert">
+                        {{ errorMessage }}
+                    </div>
+                </div>
+
+
+                <!-- Personal information =======================================================-->
+                <div class="personal-information-container">
+                    <h3 class="subtitle">Personal information</h3>
+
+                    <div class="personal-information-identity-column">
+                        <div class="input-container ic1">
+                            <!-- la fiecare input specificam numele variabilei din typescript -->
+                            <input id="firstName" class="input" type="text" formControlName="firstName" placeholder=" "
+                                required maxlength="50">
+                            <label for="firstName" class="placeholder">First name:</label>
+                        </div>
+                        <div *ngIf="errorSource === 'firstName'" class="alert alert-danger" role="alert">
+                            {{ errorMessage }}
+                        </div>
+
+                        <div class="input-container ic2">
+                            <!-- la fiecare input specificam numele variabilei din typescript -->
+                            <input id="lastName" class="input" type="text" formControlName="lastName" placeholder=" "
+                                required maxlength="50">
+                            <label for="lastName" class="placeholder">Last name:</label>
+                        </div>
+                        <div *ngIf="errorSource === 'lastName'" class="alert alert-danger" role="alert">
+                            {{ errorMessage }}
+                        </div>
+
+
+                        <div class="input-container ic2">
+                            <!-- la fiecare input specificam numele variabilei din typescript -->
+                            <input id="cnp" class="input" type="text" formControlName="cnp" placeholder=" " required
+                                maxlength="13">
+                            <label for="cnp" class="placeholder">CNP:</label>
+                        </div>
+                        <div *ngIf="errorSource === 'cnp'" class="alert alert-danger" role="alert">
+                            {{ errorMessage }}
+                        </div>
+
+                        <div class="input-container ic2">
+                            <!-- la fiecare input specificam numele variabilei din typescript -->
+                            <input id="series" class="input" type="text" formControlName="series" placeholder=" "
+                                required maxlength="3">
+                            <label for="series" class="placeholder">Identity Card Series:</label>
+                        </div>
+                        <div *ngIf="errorSource === 'series'" class="alert alert-danger" role="alert">
+                            {{ errorMessage }}
+                        </div>
+
+                        <div class="input-container ic2">
+                            <!-- la fiecare input specificam numele variabilei din typescript -->
+                            <input id="number" class="input" type="text" formControlName="number" placeholder=" "
+                                required maxlength="6">
+                            <label for="number" class="placeholder">Identity Card Number:</label>
+                        </div>
+                        <div *ngIf="errorSource === 'number'" class="alert alert-danger" role="alert">
+                            {{ errorMessage }}
+                        </div>
+
+                        <div class="input-container ic2">
+                            <!-- la fiecare input specificam numele variabilei din typescript -->
+                            <input id="issuer" class="input" type="text" formControlName="issuer" placeholder=" "
+                                required maxlength="15">
+                            <label for="issuer" class="placeholder">Identity Card Issuer:</label>
+                        </div>
+                        <div *ngIf="errorSource === 'issuer'" class="alert alert-danger" role="alert">
+                            {{ errorMessage }}
+                        </div>
+
+                        <div class="input-container ic2">
+                            <!-- la fiecare input specificam numele variabilei din typescript -->
+                            <input id="issuingDate" class="input" type="date" formControlName="issuingDate" required>
+
+                            <label for="issuingDate" class="placeholder">ID Issuing Date:</label>
+                        </div>
+                        <div *ngIf="errorSource === 'issuingDate'" class="alert alert-danger" role="alert">
+                            {{ errorMessage }}
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="personal-information-location-column">
+                        <div class="input-container ic1">
+                            <!-- la fiecare input specificam numele variabilei din typescript -->
+                            <input id="country" class="input" type="text" formControlName="country" placeholder=" "
+                                required maxlength="50">
+                            <label for="country" class="placeholder">Country:</label>
+                        </div>
+                        <div *ngIf="errorSource === 'country'" class="alert alert-danger" role="alert">
+                            {{ errorMessage }}
+                        </div>
+
+                        <div class="input-container ic2">
+                            <!-- la fiecare input specificam numele variabilei din typescript -->
+                            <input id="county" class="input" type="text" formControlName="county" placeholder=" "
+                                required maxlength="50">
+                            <label for="county" class="placeholder">County:</label>
+                        </div>
+                        <div *ngIf="errorSource === 'county'" class="alert alert-danger" role="alert">
+                            {{ errorMessage }}
+                        </div>
+
+                        <div class="input-container ic2">
+                            <!-- la fiecare input specificam numele variabilei din typescript -->
+                            <input id="city" class="input" type="text" formControlName="city" placeholder=" " required
+                                maxlength="50">
+                            <label for="city" class="placeholder">City:</label>
+                        </div>
+                        <div *ngIf="errorSource === 'city'" class="alert alert-danger" role="alert">
+                            {{ errorMessage }}
+                        </div>
+
+                        <div class="input-container ic2">
+                            <!-- la fiecare input specificam numele variabilei din typescript -->
+                            <input id="street" class="input" type="text" formControlName="street" placeholder=" "
+                                required maxlength="50">
+                            <label for="street" class="placeholder">Street:</label>
+                        </div>
+                        <div *ngIf="errorSource === 'street'" class="alert alert-danger" role="alert">
+                            {{ errorMessage }}
+                        </div>
+
+                        <div class="input-container ic2">
+                            <!-- la fiecare input specificam numele variabilei din typescript -->
+                            <input id="streetNumber" class="input" type="text" formControlName="streetNumber"
+                                placeholder=" " required maxlength="10">
+                            <label for="streetNumber" class="placeholder">Street Number:</label>
+                        </div> 
+                        <div *ngIf="errorSource === 'streetNumber'" class="alert alert-danger" role="alert">
+                            {{ errorMessage }}
+                        </div>
+
+                        <div class="input-container ic2">
+                            <!-- la fiecare input specificam numele variabilei din typescript -->
+                            <input id="flatNumber" class="input" type="text" formControlName="flatNumber"
+                                placeholder=" " required maxlength="10">
+                            <label for="flatNumber" class="placeholder">Flat Number:</label>
+                        </div>
+                        <div *ngIf="errorSource === 'flatNumber'" class="alert alert-danger" role="alert">
+                            {{ errorMessage }}
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+
+
+            </ng-template>
+
+
+            <!-- Campurile care se afiseaza daca modala este deschisa de la change phone de pe pagina de profil -->
+            <ng-template [ngIf]="modalRole==='editPhoneNumber'">
+                <div class="input-container ic2">
+                    <input id="phoneNumber" class="input" type="text" formControlName="phoneNumber" placeholder=" "
+                        required maxlength="10">
+                    <label for="phone" class="placeholder">Phone number:</label>
+                </div>
+                <div *ngIf="errorSource === 'phone'" class="alert alert-danger" role="alert">
+                    {{ errorMessage }}
+                </div>
+            </ng-template>
+
+            <!-- Campurile care se afiseaza daca modala este deschisa de la change password de pe pagina de profil -->
+            <ng-template [ngIf]="modalRole==='editPassword'">
+                <div class="input-container ic2">
+                    <input id="password" class="input" type="password" formControlName="password" placeholder=" "
+                        maxlength="60">
+                    <label for="password" class="placeholder">Password:</label>
+                </div>
+                <div *ngIf="errorSource === 'password'" class="alert alert-danger" role="alert">
+                    {{ errorMessage }}
+                </div>
+            </ng-template>
+
+
+
+            <!-- Campurile care se afiseaza daca modala este deschisa de la change profile picture de pe pagina de profil -->
+            <ng-template [ngIf]="modalRole==='editProfilePicture'">
+                
+                <input type="file" (change)="onFileSelected($event)" formControlName="profilePicture" accept="image/*">
+                
+            </ng-template>
+
+
+
+
+
+            <!-- Variabila mesaj de eroare este universal valabila pentru toate formele modalei -->
+            <div *ngIf="errorSource === 'default'" class="alert alert-danger default-error" role="alert">
+                {{ errorMessage }}
+            </div>
+
+        </form>
+
+
+        <!-- Butoanele variaza intre add si edit in functie de forma modalei accesate -->
+
+        <ng-template [ngIf]="modalType==='editModalType'">
+            <button type="button" class="submit" (click)="updateUser()">Update</button>
+            <!-- Butonul de update utilizator. La evenimentul click se apeleaza functia updateUser() a componentei curente (add-user-modal) si utilzatorul va fi updated-->
+        </ng-template>
+
+        <ng-template [ngIf]="modalType!=='editModalType'">
+            <button type="button" class="submit" (click)="addUser()">Add</button>
+            <!-- Butonul de adaugare utilizator. La evenimentul click se apeleaza functia addUser() a componentei curente (add-user-modal) si utilzatorul va fi inregistrat-->
+        </ng-template>
+        <!-- Nu am folosit ngIfElse pentru ca apareau conflicte de CSS -->
+
+    </div>
+</div>
+

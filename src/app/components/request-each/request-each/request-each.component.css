@@ -1,0 +1,19 @@
+.buttons-container {
+    display: flex;
+    gap: 5px;
+}
+
+.btn{
+    font-weight: bolder;
+    font-size:18px;
+}
+
+.btn-edit{
+    background-color: #00A3E3;
+    color: white;
+}
+
+.btn-edit:hover{
+    background-color: #2282C1;
+}
+

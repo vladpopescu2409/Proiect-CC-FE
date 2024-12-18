@@ -1,0 +1,221 @@
+{
+  "faqs-json": [
+    {
+      "category": "Recruitment & Onboarding",
+      "title": "What documents do I need for my first day?",
+      "content": "You will need to bring your government-issued ID and any other documentation requested by HR.",
+      "order": 1,
+      "id": 16
+    },
+    {
+      "category": "Recruitment & Onboarding",
+      "title": "What does the onboarding process involve?",
+      "content": "Our onboarding process involves orientations, training sessions, and one-on-one meetings with team leads.",
+      "order": 2,
+      "id": 17
+    },
+    {
+      "category": "Recruitment & Onboarding",
+      "title": "How do I set up direct deposit for my paycheck?",
+      "content": "You can set up direct deposit during the onboarding process by providing your bank account details.",
+      "order": 3,
+      "id": 18
+    },
+    {
+      "category": "Compensation & Benefits",
+      "title": "When do benefits start?",
+      "content": "Benefits typically start on the first day of the month following your start date.",
+      "order": 4,
+      "id": 19
+    },
+    {
+      "category": "Compensation & Benefits",
+      "title": "What retirement plans are available?",
+      "content": "The company offers a 401(k) plan, with details provided during the onboarding process.",
+      "order": 5,
+      "id": 20
+    },
+    {
+      "category": "Compensation & Benefits",
+      "title": "How often are performance reviews and raises given?",
+      "content": "Performance reviews are typically conducted annually, with raises given based on performance and company policy.",
+      "order": 6,
+      "id": 21
+    },
+    {
+      "category": "Workplace Policies & Environment",
+      "title": "What is the company's policy on remote work?",
+      "content": "The company has a flexible remote work policy, with details varying by department and role.",
+      "order": 7,
+      "id": 22
+    },
+    {
+      "category": "Workplace Policies & Environment",
+      "title": "What are the company's diversity and inclusion initiatives?",
+      "content": "The company has a variety of initiatives aimed at promoting diversity and inclusion, including affinity groups and bias training.",
+      "order": 8,
+      "id": 23
+    },
+    {
+      "category": "Workplace Policies & Environment",
+      "title": "What steps does the company take to ensure employee safety?",
+      "content": "The company follows all OSHA guidelines and provides regular safety training to employees.",
+      "order": 9,
+      "id": 24
+    },
+    {
+      "category": "Professional Development & Performance",
+      "title": "What professional development opportunities are available?",
+      "content": "The company offers a variety of professional development opportunities, including training seminars, e-learning courses, and tuition reimbursement.",
+      "order": 10,
+      "id": 25
+    },
+    {
+      "category": "Professional Development & Performance",
+      "title": "How are performance goals set and tracked?",
+      "content": "Performance goals are set during annual performance reviews and tracked through regular check-ins with your manager.",
+      "order": 11,
+      "id": 26
+    },
+    {
+      "category": "Professional Development & Performance",
+      "title": "How does the company support continuing education?",
+      "content": "The company supports continuing education through its tuition reimbursement program, and by offering flexible scheduling for classes.",
+      "order": 12,
+      "id": 27
+    },
+    {
+      "category": "Conflict Resolution & Employee Support",
+      "title": "What is the process for addressing conflicts with a coworker?",
+      "content": "Conflicts should first be addressed directly with the person involved, if possible. If a resolution cannot be reached, bring the issue to your manager or HR.",
+      "order": 13,
+      "id": 28
+    },
+    {
+      "category": "Conflict Resolution & Employee Support",
+      "title": "What resources are available for stress management?",
+      "content": "The company offers several resources for stress management, including an Employee Assistance Program and wellness activities.",
+      "order": 14,
+      "id": 29
+    },
+    {
+      "category": "Conflict Resolution & Employee Support",
+      "title": "How does the company handle harassment complaints?",
+      "content": "The company takes harassment complaints very seriously. Any instances should be reported directly to HR, who will conduct a thorough investigation.",
+      "order": 15,
+      "id": 30
+    },
+    {
+      "category": "Employee Resources & Services",
+      "title": "What technology resources are provided to employees?",
+      "content": "The company provides all necessary technology for your role, which can include a laptop, monitors, and relevant software subscriptions.",
+      "order": 16,
+      "id": 31
+    },
+    {
+      "category": "Employee Resources & Services",
+      "title": "What is the policy on travel for work?",
+      "content": "Travel for work is handled on a case-by-case basis, depending on the requirements of your role and project.",
+      "order": 17,
+      "id": 32
+    },
+    {
+      "category": "Employee Resources & Services",
+      "title": "What resources are available for remote work?",
+      "content": "The company provides all necessary technology for remote work, and remote workers are eligible for a home office stipend.",
+      "order": 18,
+      "id": 33
+    },
+    {
+      "category": "Recruitment & Onboarding",
+      "title": "What should I expect in the first week of joining?",
+      "content": "In the first week, you will meet your team, receive company equipment, attend orientations, and start initial job trainings.",
+      "order": 19,
+      "id": 34
+    },
+    {
+      "category": "Compensation & Benefits",
+      "title": "How is overtime handled?",
+      "content": "Overtime is handled as per local labor laws and company policy. Some roles are eligible for overtime pay while others may not be.",
+      "order": 20,
+      "id": 35
+    },
+    {
+      "category": "Workplace Policies & Environment",
+      "title": "Are there company-wide meetings or events?",
+      "content": "Yes, we host company-wide meetings and events throughout the year to facilitate communication, collaboration, and camaraderie.",
+      "order": 21,
+      "id": 36
+    },
+    {
+      "category": "Professional Development & Performance",
+      "title": "What is the company's policy on promotions?",
+      "content": "Promotions are based on job performance and business needs, and are discussed during annual performance reviews.",
+      "order": 22,
+      "id": 37
+    },
+    {
+      "category": "Conflict Resolution & Employee Support",
+      "title": "How does the company support mental health?",
+      "content": "The company supports mental health through confidential counseling services via the Employee Assistance Program, as well as offering flexible work options.",
+      "order": 23,
+      "id": 38
+    },
+    {
+      "category": "Employee Resources & Services",
+      "title": "Are there opportunities for social engagement with other employees?",
+      "content": "Yes, the company organizes regular team-building events and activities, both in-person and virtual, to foster employee engagement and teamwork.",
+      "order": 24,
+      "id": 39
+    },
+    {
+      "category": "Recruitment & Onboarding",
+      "title": "Who do I contact if I have questions during the onboarding process?",
+      "content": "If you have any questions during the onboarding process, you can reach out to your onboarding coordinator or HR representative.",
+      "order": 25,
+      "id": 40
+    },
+    {
+      "category": "Compensation & Benefits",
+      "title": "Does the company offer parental leave?",
+      "content": "Yes, the company offers both maternity and paternity leave as part of its comprehensive benefits package.",
+      "order": 26,
+      "id": 41
+    },
+    {
+      "category": "Workplace Policies & Environment",
+      "title": "Does the company have a sustainability policy?",
+      "content": "Yes, the company is committed to sustainable practices and has a policy in place to minimize our environmental impact.",
+      "order": 27,
+      "id": 42
+    },
+    {
+      "category": "Professional Development & Performance",
+      "title": "Are there opportunities for cross-training in other departments?",
+      "content": "Cross-training opportunities are available and encouraged for professional growth, but will depend on business needs and your current role.",
+      "order": 28,
+      "id": 43
+    },
+    {
+      "category": "Conflict Resolution & Employee Support",
+      "title": "What should I do if I witness a violation of company policy?",
+      "content": "Any witnessed violation of company policy should be reported to your manager or HR. We value transparency and integrity in our workplace.",
+      "order": 29,
+      "id": 44
+    },
+    {
+      "category": "Employee Resources & Services",
+      "title": "What facilities and amenities are available at the office?",
+      "content": "Our office offers various facilities and amenities such as an on-site cafeteria, fitness center, and comfortable break rooms.",
+      "order": 30,
+      "id": 45
+    },
+    {
+      "category": "Compensation & Benefits",
+      "title": "Test",
+      "content": "Test",
+      "order": "",
+      "id": 46
+    }
+  ]
+}

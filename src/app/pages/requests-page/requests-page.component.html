@@ -1,0 +1,9 @@
+<app-navigation-bar></app-navigation-bar>
+<div id="requests-page">
+
+    <h1>Requests</h1>
+
+    <app-requests-user *ngIf="userRole==='employee'" [userRole]="userRole"></app-requests-user>
+    
+    <app-requests-hr *ngIf="userRole==='hr'" [userRole]="userRole"></app-requests-hr>
+</div>

@@ -1,0 +1,130 @@
+<!-- A FormGroup aggregates the values of each child FormControl into one object, with each control name as the key.  -->
+<!-- onSubmit() Method called when the "submit" event is triggered on the form. Triggers the ngSubmit emitter to emit the "submit" event as its payload. -->
+<div class="feedback-page">
+
+
+  <!-- DACA ESTE EMPLOYEE SE INCARCA DOAR FORMULARUL DE FEEDBACK-->
+  <ng-template [ngIf]="userRole==='employee'">
+    <p class="upper-text">Use the form below to send us your comments. We read all feedbacks and suggestions and we will
+      try to solve them as soon as possible.
+      For any other enquires please email our team at hr@hr-connect.com</p>
+    <div class="card form-containter">
+
+      <form class="feedback-form" [formGroup]="feedbackForm" (ngSubmit)="saveFeedback()">
+        <mat-form-field>
+          <mat-label>Select Category</mat-label>
+          <mat-select formControlName="type">
+            <mat-option value="Feedback">Feedback</mat-option>
+            <mat-option value="Suggestion">Suggestion</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Title</mat-label>
+          <input matInput formControlName="title">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Content</mat-label>
+          <textarea matInput formControlName="body" rows="10"></textarea>
+        </mat-form-field>
+
+        <button class="btn btn-primary">Submit</button>
+      </form>
+
+    </div>
+  </ng-template>
+
+  <!-- DACA ESTE HR SE INCARCA DOAR TABELUL CU FEEDBACK-URILE PRIMITE -->
+  <ng-template [ngIf]="userRole==='hr'">
+    <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows class="mat-elevation-z0">
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+        <td mat-cell *matCellDef="let element"> {{element['id']}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Category </th>
+        <td mat-cell *matCellDef="let element"> {{element['type']}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
+        <td mat-cell *matCellDef="let element"> {{element['title']}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="body">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Content </th>
+        <td mat-cell class="content-text" *matCellDef="let element"> {{element['body']}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="createdBy">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Author </th>
+        <td mat-cell *matCellDef="let element"> {{element?.createdBy?.loginDetails.email}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="rating">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Favourite</th>
+        <td mat-cell *matCellDef="let element">
+          <mat-slide-toggle [checked]="element.rating" (change)="toggleFavourite(element)"></mat-slide-toggle>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef>Delete</th>
+        <td mat-cell *matCellDef="let element">
+          <button type="button" class="btn btn-secondary delete" (click)="deleteFeedback(element.id)">
+            Delete
+          </button>
+        </td>
+      </ng-container>
+
+
+
+      <ng-container matColumnDef="expand">
+        <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+        <td mat-cell *matCellDef="let element">
+          <!-- if the row is expanded it sets to null collapsing the row otherwise expandedElement is element and expands it -->
+          <button mat-icon-button aria-label="expand row"
+            (click)="(expandedElement = expandedElement === element ? null : element); $event.stopPropagation()">
+            <mat-icon *ngIf="expandedElement !== element">keyboard_arrow_down</mat-icon>
+            <mat-icon *ngIf="expandedElement === element">keyboard_arrow_up</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+      <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplayWithExpand.length">
+          <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+            <div class="example-element-diagram">
+              <div class="example-element-position">
+                <p class="text-style"> {{element.body}} </p>
+              </div>
+
+            </div>
+
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
+      <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand;" class="example-element-row"
+        [class.example-expanded-row]="expandedElement === element"
+        (click)="expandedElement = expandedElement === element ? null : element">
+      </tr>
+
+      <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+    </table>
+
+
+
+    <div class="paginator">
+      <mat-paginator [length]="feedbacks.length" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"
+        aria-label="Select page" #paginator>
+      </mat-paginator>
+    </div>
+
+    <!-- https://material.angular.io/components/table/overview#table-row-binding this is to create an event -->
+  </ng-template>
+
+
+</div>

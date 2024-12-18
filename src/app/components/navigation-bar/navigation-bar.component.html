@@ -1,0 +1,75 @@
+<!-- we need this one so we can get some Angular Material Icons -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Open+Sans&family=Raleway&display=swap"
+  rel="stylesheet" />
+
+<nav class="navbar navbar-expand-lg navbar-light">
+  <div class="brand-container">
+    <a class="navbar-brand" href="http://localhost:4200/newsfeed"><img src="../assets/images/connect-icon-svg.svg"
+        width="34" height="34" /></a>
+    <a href="http://localhost:4200/newsfeed" class="the-name-of-app">HR CONNECT</a>
+  </div>
+  <!-- placeholder image -->
+
+  <!-- <img src="../assets/images/home_FILL0_wght600_GRAD0_opsz48.svg"> -->
+  <div *ngIf="userRole!=='admin'" class="link-icons-on-the-navbar">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <div class="nav-icon-and-text">
+          <a class="nav-link-icon" id="style-2" href="http://localhost:4200/newsfeed"><mat-icon>home</mat-icon></a>
+
+          <a class="nav-link" id="style-2" href="http://localhost:4200/newsfeed">Home</a>
+        </div>
+      </li>
+
+      <li class="nav-item">
+        <div class="nav-icon-and-text">
+          <a class="nav-link-icon" href="http://localhost:4200/faq">
+            <mat-icon>quiz</mat-icon>
+          </a>
+          <a class="nav-link" href="http://localhost:4200/faq">FAQ</a>
+        </div>
+
+        <!-- <a [routerLink]="['/profile']"class="nav-link" href="#">Profile</a> -->
+      </li>
+      <li class="nav-item">
+        <div class="nav-icon-and-text">
+          <a class="nav-link-icon" href="http://localhost:4200/benefits"> <mat-icon>loyalty</mat-icon></a>
+          <a class="nav-link" href="http://localhost:4200/benefits">Benefits</a>
+        </div>
+      </li>
+
+
+      <li class="nav-item">
+        <div class="nav-icon-and-text">
+          <a class="nav-link-icon" href="http://localhost:4200/requests">
+            <mat-icon>rate_review</mat-icon></a>
+          <a class="nav-link" href="http://localhost:4200/requests">HR Requests</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <div class="nav-icon-and-text">
+          <a class="nav-link-icon" href="http://localhost:4200/feedback">
+            <mat-icon>difference</mat-icon></a>
+          <a class="nav-link" href="http://localhost:4200/feedback">Feedback</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <div class="nav-icon-and-text">
+          <a class="nav-link-icon" href="http://localhost:4200/profile">
+            <mat-icon>person_pin_circle</mat-icon></a>
+          <a class="nav-link" href="http://localhost:4200/profile">User Details</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="logout-area">
+    <div class="vr"></div>
+    <button type="button" class="btn btn-danger" (click)="logout()">
+      Logout
+    </button>
+  </div>
+</nav>

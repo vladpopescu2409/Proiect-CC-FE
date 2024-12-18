@@ -1,0 +1,24 @@
+{
+    "requests": [
+        {
+            "requesterID": 2,
+            "type": "Adeverinta angajat de test",
+            "details": "I will bring your government-issued ID and any other documentation requested by HR.",
+            "requestDate": "1/1/2011",
+            "finishDate": "3/1/2011",
+            "status":"resolved",
+            "responderID":3,
+            "id":1
+        },
+        {
+            "requesterID": 4,
+            "type": "Adeverinta angajat de test2",
+            "details": "I won;t bring your government-issued ID and any other documentation requested by HR.",
+            "requestDate": "2/1/2011",
+            "finishDate": "",
+            "status":"pending",
+            "responderID":5,
+            "id":2
+        }
+    ]
+}

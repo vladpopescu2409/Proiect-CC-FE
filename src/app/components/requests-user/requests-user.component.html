@@ -1,0 +1,292 @@
+<h4>On this page you can submit requests to the HR. Please choose one of the predefined requests types or submit one of
+    your own.</h4>
+
+<div class="page-content">
+
+    <div class="form-div">
+
+        <div class="input-container">
+            Select request type:
+            <select id="reqType" class="input" name="reqType" (change)="onReqTypeChange()">
+                <option disabled selected value="">Request type</option>
+                <option *ngFor="let reqType of reqTypes" [value]="reqType">{{ reqType.replaceAll('_',' ') }}</option>
+            </select>
+        </div>
+
+
+        <form [formGroup]="requestForm" autocomplete="off" class="document-model">
+
+            <!-- PAID LEAVE -->
+            <section class="request-text" *ngIf="selectedReqType === 'Paid_leave'">
+                <h3>Cerere - Concediu de odihna</h3>
+
+                Subsemnatul <p class="unchangeable-field">{{userProfile.lastName}} {{userProfile.firstName}}</p>,
+
+                angajat(ă) al/a HR Connect pe perioadă nedeterminată începând cu data de <p class="unchangeable-field">
+                    {{userProfile.joinDate}}</p>,
+
+                în funcția de <p class="unchangeable-field">{{userProfile.position.replaceAll('_',' ')}}</p>,
+
+                vă rog să-mi aprobați efectuarea unui concediu in perioada
+
+                <input id="startDate" type="text" placeholder="Start date:" required
+                    (focus)="onPaidLeaveStartDateFocus($event)" (input)="onPaidLeaveStartDateInput($event)"
+                    class="magic-date">
+                <label for="startDate" class="placeholder"></label>
+                -
+                <input id="endDate" type="text" placeholder="End date:" required [max]="maxEndDate"
+                    (focus)="onPaidLeaveEndDateFocus($event)" (input)="onEndDateInput($event)" class="magic-date">
+                <label for="endDate" class="placeholder"></label>
+
+                <hr>
+                Zile de concediu de odihnă rămase: <b>{{userProfile.vacationDays}}</b>
+
+            </section>
+
+            <!-- MEDICAL LEAVE -->
+            <section class="request-text" *ngIf="selectedReqType === 'Medical_leave'">
+                <h3>Cerere - Concediu medical</h3>
+
+                Subsemnatul <p class="unchangeable-field">{{userProfile.lastName}} {{userProfile.firstName}}</p>,
+
+                angajat(ă) al/a HR Connect pe perioadă nedeterminată începând cu data de <p class="unchangeable-field">
+                    {{userProfile.joinDate}}</p>,
+
+                în funcția de <p class="unchangeable-field">{{userProfile.position.replaceAll('_',' ')}}</p>,
+
+                vă rog să-mi aprobați efectuarea unui concediu medical in perioada
+                <input id="startDate" type="text" placeholder="Start date:" required
+                    (focus)="onMedicalLeaveStartDateFocus($event)" (input)="onMedicalLeaveStartDateInput($event)"
+                    class="magic-date">
+                <label for="startDate" class="placeholder"></label>
+                -
+                <input id="endDate" type="text" placeholder="End date:" required [max]="maxEndDate"
+                    (focus)="onMedicalLeaveEndDateFocus($event)" (input)="onEndDateInput($event)" class="magic-date">
+                <label for="endDate" class="placeholder"></label>
+
+                <hr>
+                Zile de concediu medical rămase: <b>{{userProfile.sickDays}}</b>
+
+            </section>
+
+            <!--EMPLOYED STATUS -->
+            <section class="request-text" *ngIf="selectedReqType === 'Employed_status'">
+                <h3>ADEVERINȚĂ</h3>
+
+                Prin prezenta, se adeverește că domnul/doamna <p class="unchangeable-field">{{userProfile.lastName}}
+                    {{userProfile.firstName}}</p>
+
+                domiciliat/ă în <p class="unchangeable-field">{{userProfile.address?.country}}</p>,
+
+                județul <p class="unchangeable-field">{{userProfile.address?.county}}</p>,
+
+                localitatea <p class="unchangeable-field">{{userProfile.address?.city}}</p>,
+
+                <p class="unchangeable-field">{{userProfile.address?.street}} {{userProfile.address?.streetNumber}}
+                    {{userProfile.address?.flatNumber}}</p>
+
+                identificat/ă prin CNP <p class="unchangeable-field">{{userProfile.identityCard?.cnp}}</p>
+
+                act de identitate CI
+
+                seria <p class="unchangeable-field">{{userProfile.identityCard?.series}}</p>
+
+                nr. <p class="unchangeable-field">{{userProfile.identityCard?.number}}</p>
+
+                eliberat de <p class="unchangeable-field">{{userProfile.identityCard?.issuer}}</p>
+
+                la data de <p class="unchangeable-field">{{userProfile.identityCard?.issuingDate}}</p>,
+
+                este angajat(ă) al/a HR Connect
+                pe perioadă nedeterminată/determinată începând cu data de <p class="unchangeable-field">
+                    {{userProfile.joinDate}}</p>,
+
+                în funcția de <p class="unchangeable-field">{{userProfile.position.replaceAll('_',' ')}}</p>,
+
+                conform
+                contractului individual de muncă nr. <p class="unchangeable-field">{{userProfile.id}}</p>/2048,
+                înregistrat în Registrul General de evidență a salariaților conform legii.
+
+                Prezenta se eliberează spre a-i servi la <textarea id="details" type="text" formControlName="details"
+                    placeholder="reason" required maxlength="250" name="details" rows="4" cols="50"></textarea>
+                <label for="details"></label>
+            </section>
+
+            <!-- CHANGE PERSONAL DATA -->
+            <section *ngIf="selectedReqType==='Change_personal_data'">
+
+                <div class="input-container ic-2">
+                    Select data you want to change:
+                    <select id="dataToChange" class="input" name="dataToChange" (change)="onDataToChangeChange()">
+                        <option disabled selected value="">Data to change</option>
+                        <option *ngFor="let dataToChange of datasToChange" [value]="dataToChange">{{ dataToChange }}</option>
+                    </select>
+                </div>
+
+                <div class="request-text">
+                    <label for="details"></label>
+                    <input id="details" class="personal-data-input" name="details" type="text" formControlName="details" placeholder="New personal data" required maxlength="20" >
+                </div>
+            </section>
+
+            <!-- CUSTOM REQUEST -->
+            <section *ngIf="selectedReqType==='Custom_request'" class="request-text">
+                <textarea id="details" type="text" formControlName="details"
+                    placeholder="Please describe here what kind of request do you need and all its necessary details."
+                    required maxlength="250" name="details" rows="4" cols="50"></textarea>
+                <label for="details"></label>
+            </section>
+
+            <!-- TRAINING REQUEST -->
+            <section *ngIf="selectedReqType==='Training_request'" class="request-text">
+                <textarea id="details" type="text" formControlName="details"
+                    placeholder="Please write here the training you want to enroll in and the necessary details." required
+                    maxlength="250" name="details" rows="4" cols="50"></textarea>
+                <label for="details"></label>
+            </section>
+
+            <!-- RESIGNATION -->
+            <section class="request-text" *ngIf="selectedReqType === 'Resignation'">
+                <h3>Demisie</h3>
+                Subsemnatul <p class="unchangeable-field">{{userProfile.lastName}} {{userProfile.firstName}}</p>,
+
+                domiciliat/ă în <p class="unchangeable-field">{{userProfile.address?.country}}</p>,
+
+                județul <p class="unchangeable-field">{{userProfile.address?.county}}</p>,
+
+                localitatea <p class="unchangeable-field">{{userProfile.address?.city}}</p>,
+
+                strada <p class="unchangeable-field">{{userProfile.address?.street}},
+                    nr. {{userProfile.address?.streetNumber}},
+                    apartament {{userProfile.address?.flatNumber}}</p>,
+
+                identificat/ă prin CNP <p class="unchangeable-field">{{userProfile.identityCard?.cnp}}</p>
+
+                act de identitate CI seria <p class="unchangeable-field">{{userProfile.identityCard?.series}}</p>
+
+                nr. <p class="unchangeable-field">{{userProfile.identityCard?.number}}</p>
+
+                eliberat de <p class="unchangeable-field">{{userProfile.identityCard?.issuer}}</p>
+
+                la data de <p class="unchangeable-field">{{userProfile.identityCard?.issuingDate}}</p>,
+
+                angajat(ă) al/a HR Connect pe perioadă nedeterminată începând cu data de <p class="unchangeable-field">
+                    {{userProfile.joinDate}}</p>,
+
+                în funcția de <p class="unchangeable-field">{{userProfile.position.replaceAll('_',' ')}}</p>,
+
+                prin prezenta vă rog să îmi aprobați încetarea raporturilor de muncă prin demisie.
+            </section>
+
+            <div *ngIf="errorMessage" class="alert alert-danger request-form-error-mesage" role="alert">
+                {{ errorMessage }}
+            </div>
+
+            <button type="button" class="submit" (click)="submitRequest()"><b>Send request</b></button>
+            <!-- Butonul de submit request. La evenimentul click se apeleaza functia submitRequest() a componentei curente (requests-user) si cererea va fi aplicata-->
+
+        </form>
+
+        <ng-template [ngIf]="actionState === 'success'">
+            <div  class="alert-container">
+                <div id='hideMe' class="alert alert-success" role="alert">
+                    Your request has been submitted!
+                </div>
+            </div>  
+        </ng-template>
+
+    </div>
+
+
+
+
+
+
+
+
+    <div class="user-requests-history">
+        <hr>
+        <h2>History</h2>
+        <!-- Cu functia ngIf verificam variabila isLoading. Aceasta variabila incepe cu valoarea true, iar apoi este schimbata in false la sfarsitul setului de instructiuni. -->
+        <ng-template [ngIf]="isLoading" [ngIfElse]="displayList">
+            <app-spinner></app-spinner>
+        </ng-template>
+
+        <ng-template #displayList>
+
+
+            <div class="requests-table-div">
+
+
+
+
+
+
+                <table mat-table [dataSource]="dataSource" matSort class="table table-hover" matSortActive="requestDate"
+                    matSortDirection="desc">
+
+                    <!-- ID Column -->
+                    <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by ID">ID</th>
+                        <td mat-cell *matCellDef="let element">{{element.id}}</td>
+                    </ng-container>
+
+                    <!-- Request type Column -->
+                    <ng-container matColumnDef="requestType">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
+                        <td mat-cell *matCellDef="let element">{{ element.type.replaceAll('_',' ') }}</td>
+                    </ng-container>
+
+                    
+
+                    <!-- Status Column -->
+                    <ng-container matColumnDef="status">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by status">
+                            Status
+                        </th>
+                        <td mat-cell *matCellDef="let element" [ngStyle]="{'color':
+                element.status === 'Pending' ? '#00A3E3' : element.status === 'Approved' ? 'green' : 'red'}">
+                            <b>{{element.status}}</b></td>
+                    </ng-container>
+
+                    <!-- Request date Column -->
+                    <ng-container matColumnDef="requestDate">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header
+                            sortActionDescription="Sort by request date">
+                            Request date</th>
+                        <td mat-cell *matCellDef="let element">{{element.requestDate}}</td>
+                    </ng-container>
+
+                    <!-- Finish date -->
+                    <ng-container matColumnDef="finishDate">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header
+                            sortActionDescription="Sort by finish date">
+                            Finish
+                            date</th>
+                        <td mat-cell *matCellDef="let element">{{element.finishDate}}</td>
+                    </ng-container>
+
+                    <!-- Action Column -->
+                    <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef>Action</th>
+                        <td mat-cell *matCellDef="let requestUser">
+                            <app-request-each [requestUser]="requestUser"
+                                (newViewDetailsEvent)="viewDetails(requestUser)"></app-request-each>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+                    <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
+                </table>
+                <mat-paginator [pageSizeOptions]="[20,10,50,100]" showFirstLastButtons>
+                </mat-paginator>
+                <!-- Here, we bind the pageSize and pageIndex properties of the MatPaginator to the corresponding properties of the dataSource.paginator. We also set a default value of 20 for the pageSize in case the paginator object is null or undefined. -->
+            </div>
+        </ng-template>
+
+        <app-request-details-modal *ngIf="isModalOpen" [editedRequest]="editedRequest" [userRole]="userRole"
+            (newCloseModalEvent)="closeModal()"
+            (newGetRequestsEvent)="getAllRequestsByUser()"></app-request-details-modal>
+        <!-- Evenimentul newCloseModalEvent este emis din componenta copil add-user-modal si este receptionat de catre componenta parinte admin-home-page, care apeleaza functia proprie closeModal() si ascunde la loc formularul de adaugare utilizatori. -->
+    </div>
+</div>

@@ -1,0 +1,30 @@
+<div class="form glass">
+    <div class="title">Welcome to HR Connect</div>
+
+    <form (ngSubmit)="submitForm()" [formGroup]="form" autocomplete="off">
+
+        <!-- La evenimentul ngSubmit (trigger-uit mai jos de butonul login) se va apela functia submitForm din typescript. 
+        Asociem formGroup cu variabila form din typescript.
+        La fiecare input vom seta formControlName la fel ca numele variabilelor din form din typescript. -->
+
+        <div class="input-container ic1">
+            <input matInput id="email" class="input" type="text" placeholder=" " formControlName="email"
+                maxlength="60" />
+            <!-- <div class="cut cut-short"></div> -->
+            <label for="email" class="placeholder">Email</label>
+        </div>
+        <div class="input-container ic2">
+            <input matInput id="password" class="input" type="password" placeholder=" " formControlName="password"
+                maxlength="60" />
+            <!-- <div class="cut"></div> -->
+            <label for="password" class="placeholder">Password</label>
+        </div>
+
+        <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+            {{ errorMessage }}
+        </div>
+        
+        <button type="submit" class="submit">login</button>
+    </form>
+
+</div>
