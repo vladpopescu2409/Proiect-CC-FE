@@ -84,6 +84,6 @@ export class UserService {
     // Functia de login era un request de tip post la server, care transmitea e-mail,password si token, astfel incat response-ul sa fie un JSON cu cele 3, cu scopul ca noi sa preluam token-ul din response.
 
     // Acum ca am implementat backend-ul transmitem doar e-amil si password si vom primii token-ul direct din backend
-    return this.http.post('http://localhost:8082/auth', { email, password });
+    return this.http.post('http://localhost:8080/auth/login', { email, password });
   }
 }
