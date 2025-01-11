@@ -13,7 +13,7 @@ export class FaqService {
   constructor(private http: HttpClient) {
   }
   getFaqContent(): Observable<FaqContent[]> {
-    return this.http.get<FaqContent[]>('http://localhost:8082/faq').pipe(
+    return this.http.get<FaqContent[]>('http://localhost:8082/faq/all').pipe(
       map((faqs: FaqContent[]) => faqs.sort((a, b) => a.orderNumber - b.orderNumber))
     ) as Observable<FaqContent[]>;
   }
@@ -23,7 +23,7 @@ export class FaqService {
   }
 
   addFaqContent(postObject: FaqContent) {
-    return this.http.post('http://localhost:8082/faq', postObject) as Observable<FaqContent>
+    return this.http.put('http://localhost:8082/faq', postObject) as Observable<FaqContent>
   }
 
   // updateFaqContent(postObject: FaqContent) {

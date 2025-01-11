@@ -20,7 +20,7 @@ export class FeedbackFormService {
   }
 
   addFeedback(postObject: Feedback) {
-    return this.http.post('http://localhost:8082/feedback', postObject) as Observable<Feedback>
+    return this.http.put('http://localhost:8082/feedback', postObject) as Observable<Feedback>
   }
 
   updateFeedback(postObject: Feedback) {

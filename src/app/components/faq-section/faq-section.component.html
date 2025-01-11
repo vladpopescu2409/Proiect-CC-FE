@@ -51,7 +51,7 @@
     <!-- loop goes by category - represents one item in the faqCategory - then we will add faq items from the BE within each category  -->
     <div *ngFor="let category of faqCategories" [id]="category">
       <!-- filter the categories that do not have any items in them so they don't appear when we are searching for data  -->
-      <div *ngIf="filteredFaqsByCategory[category].length > 0">
+      <div *ngIf="filteredFaqsByCategory[category] != null && filteredFaqsByCategory[category].length > 0">
         <!-- the faq will have an updated name instead of the one in the database-->
         <h2 class="category-title">{{ categoryDisplayNames[category] }}</h2>
 
