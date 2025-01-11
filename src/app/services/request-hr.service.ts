@@ -2,43 +2,44 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable} from '@angular/core';
 import { Observable } from 'rxjs';
 import { RequestUser } from '../models/request-user';
+import { EnvService } from './env.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RequestHrService{
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private envService: EnvService) { }
 
   getAllRequests(): Observable<RequestUser[]> {
-    return this.http.get<RequestUser[]>('http://localhost:8082/request/allRequests');
+    return this.http.get<RequestUser[]>(`${this.envService.backendAddress}/request/allRequests`);
   }
 
   getAllPendingRequests(): Observable<RequestUser[]> {
-    return this.http.get<RequestUser[]>('http://localhost:8082/request/allInPendingRequests');
+    return this.http.get<RequestUser[]>(`${this.envService.backendAddress}/request/allInPendingRequests`);
   }
 
   getAllDeniedRequests(): Observable<RequestUser[]> {
-    return this.http.get<RequestUser[]>('http://localhost:8082/request/allDeniedRequests');
+    return this.http.get<RequestUser[]>(`${this.envService.backendAddress}/request/allDeniedRequests`);
   }
 
   getAllApprovedRequests(): Observable<RequestUser[]> {
-    return this.http.get<RequestUser[]>('http://localhost:8082/request/allApprovedRequests');
+    return this.http.get<RequestUser[]>(`${this.envService.backendAddress}/request/allApprovedRequests`);
   }
 
   getAllRequestsByUser(): Observable<RequestUser[]>{
-    return this.http.get<RequestUser[]>('http://localhost:8082/request/allRequestsByUser');
+    return this.http.get<RequestUser[]>(`${this.envService.backendAddress}/request/allRequestsByUser`);
   }
 
   denyRequest(id?: number): Observable<any> {
-    return this.http.post(`http://localhost:8082/request/respond-to-request?requestId=${id}&isApproved=false`,{});  
+    return this.http.post(`${this.envService.backendAddress}/request/respond-to-request?requestId=${id}&isApproved=false`,{});  
   }
 
   approveRequest(id?: number): Observable<any> {
-    return this.http.post(`http://localhost:8082/request/respond-to-request?requestId=${id}&isApproved=true`,{}); 
+    return this.http.post(`${this.envService.backendAddress}/request/respond-to-request?requestId=${id}&isApproved=true`,{}); 
   }
 
   addRequest(type:string,details:string): Observable<RequestUser>{
-    return this.http.put<RequestUser>('http://localhost:8082/request/add',{type,details});
+    return this.http.put<RequestUser>(`${this.envService.backendAddress}/request/add`,{type,details});
   }
 
 }

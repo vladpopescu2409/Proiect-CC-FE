@@ -4,26 +4,27 @@ import { Observable } from 'rxjs';
 import { FaqContent } from '../models/faq';
 //we need this to map the order of the faqs
 import { map } from 'rxjs/operators';
+import { EnvService } from './env.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FaqService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private envService: EnvService) {
   }
   getFaqContent(): Observable<FaqContent[]> {
-    return this.http.get<FaqContent[]>('http://localhost:8082/faq/all').pipe(
+    return this.http.get<FaqContent[]>(`${this.envService.backendAddress}/faq/all`).pipe(
       map((faqs: FaqContent[]) => faqs.sort((a, b) => a.orderNumber - b.orderNumber))
     ) as Observable<FaqContent[]>;
   }
 
   getFaqContentByOrder(order: number) {
-    return this.http.get(`http://localhost:8082/faq/${order}`) as Observable<FaqContent>
+    return this.http.get(`${this.envService.backendAddress}/faq/${order}`) as Observable<FaqContent>
   }
 
   addFaqContent(postObject: FaqContent) {
-    return this.http.put('http://localhost:8082/faq', postObject) as Observable<FaqContent>
+    return this.http.put(`${this.envService.backendAddress}/faq`, postObject) as Observable<FaqContent>
   }
 
   // updateFaqContent(postObject: FaqContent) {
@@ -52,13 +53,13 @@ export class FaqService {
     console.log(result);
 
 
-    return this.http.post<FaqContent>('http://localhost:8082/faq/upload-file', formData);
+    return this.http.post<FaqContent>(`${this.envService.backendAddress}/faq/upload-file`, formData);
   }
 
 
 
   getPDF(id: number): Observable<File> {
-    return this.http.get(`http://localhost:8082/faq/get-file?id=${id}`, { responseType: 'blob' })
+    return this.http.get(`${this.envService.backendAddress}/faq/get-file?id=${id}`, { responseType: 'blob' })
       .pipe(
         map((response: Blob) => {
           const file = new File([response], `document_${id}.pdf`, { type: 'application/pdf' });
@@ -83,14 +84,14 @@ export class FaqService {
 
 
   updateFaqContent(postObject: FaqContent) {
-    return this.http.post(`http://localhost:8082/faq`, postObject) as Observable<FaqContent>
+    return this.http.post(`${this.envService.backendAddress}/faq`, postObject) as Observable<FaqContent>
   }
 
   deleteFaqContent(id: number) {
     //Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0YWRtQGVtYWlsLnJvIiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNjg3NTEzNzgyLCJpYXQiOjE2ODc1MDc3ODJ9.5R6d4y1_ZG_cudFojLYVV29kcDrETLKkFznq7lsHBzo
     const headers = new HttpHeaders();
     headers.set('Access-Control-Allow-Origin', 'application/json; charset=utf-8');
-    return this.http.delete(`http://localhost:8082/faq?id=${id}`, {}) as Observable<{}>
+    return this.http.delete(`${this.envService.backendAddress}/faq?id=${id}`, {}) as Observable<{}>
   }
 
 

@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Address, IdentityCard, LoginDetails, User } from '../models/user';
+import { EnvService } from './env.service';
 
 // Acest serviciu tine locul API-ului de backend
 
@@ -10,30 +11,30 @@ import { Address, IdentityCard, LoginDetails, User } from '../models/user';
 })
 export class UserService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private envService: EnvService) { }
 
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>('http://localhost:8082/user/all');
+    return this.http.get<User[]>(`${this.envService.backendAddress}/user/all`);
   }
 
   getUserSelf(): Observable<User> {
-    return this.http.get<User>('http://localhost:8082/user/self');
+    return this.http.get<User>(`${this.envService.backendAddress}/user/self`);
   }
 
   addUser(user: User, loginDetails: LoginDetails, address: Address, identityCard: IdentityCard): Observable<User> {
-    return this.http.put<User>('http://localhost:8082/user', { user, loginDetails, address, identityCard });
+    return this.http.put<User>(`${this.envService.backendAddress}/user`, { user, loginDetails, address, identityCard });
   }
 
   updateUser(user: User, loginDetails: LoginDetails, address: Address, identityCard: IdentityCard): Observable<User> {
-    return this.http.put<User>('http://localhost:8082/user', { user, loginDetails, address, identityCard });
+    return this.http.put<User>(`${this.envService.backendAddress}/user`, { user, loginDetails, address, identityCard });
   }
 
   updatePhoneNumber(phoneNumber?: string): Observable<User> {
-    return this.http.post<User>('http://localhost:8082/user/self', { phoneNumber });
+    return this.http.post<User>(`${this.envService.backendAddress}/user/self`, { phoneNumber });
   }
 
   updatePassword(password?: string): Observable<User> {
-    return this.http.post<User>('http://localhost:8082/user/self', { password });
+    return this.http.post<User>(`${this.envService.backendAddress}/user/self`, { password });
   }
 
   uploadProfilePicture(image: File): Observable<User> {
@@ -53,18 +54,18 @@ export class UserService {
     // console.log(result);
 
 
-    return this.http.post<User>('http://localhost:8082/user/upload-image', formData);
+    return this.http.post<User>(`${this.envService.backendAddress}/user/upload-image`, formData);
   }
 
   getProfilePicture(): Observable<Blob> {
-    return this.http.get('http://localhost:8082/user/get-image', { responseType: 'blob' });
+    return this.http.get(`${this.envService.backendAddress}/user/get-image`, { responseType: 'blob' });
   }
   // { responseType: 'blob' } is specified. This tells the HttpClient to expect the response to be of type Blob. The responseType property is set to 'blob' to ensure that the response is treated as binary data.
   
 
 
   deleteUser(id: number): Observable<{}> {
-    return this.http.delete(`http://localhost:8082/user?id=${id}`, {}) as Observable<{}>
+    return this.http.delete(`${this.envService.backendAddress}/user?id=${id}`, {}) as Observable<{}>
   }
 
 
@@ -84,6 +85,6 @@ export class UserService {
     // Functia de login era un request de tip post la server, care transmitea e-mail,password si token, astfel incat response-ul sa fie un JSON cu cele 3, cu scopul ca noi sa preluam token-ul din response.
 
     // Acum ca am implementat backend-ul transmitem doar e-amil si password si vom primii token-ul direct din backend
-    return this.http.post('http://localhost:8080/auth/login', { email, password });
+    return this.http.post(`${this.envService.authAddress}/auth/login`, { email, password });
   }
 }

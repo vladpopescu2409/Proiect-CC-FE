@@ -2,13 +2,14 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map, of } from 'rxjs';
 import { NewsletterArticle } from '../models/newsletter-article';
+import { EnvService } from './env.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NewsletterService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private envService: EnvService) {
   }
 
   // getNewsletterArticles() {
@@ -19,17 +20,17 @@ export class NewsletterService {
 
  
   getNewsletterArticles(): Observable<NewsletterArticle[]> {
-    return this.http.get<NewsletterArticle[]>('http://localhost:8082/article/all')
+    return this.http.get<NewsletterArticle[]>(`${this.envService.backendAddress}/article/all`)
      
   }
   
 
   getNewsletterArticleById(id: number) {
-    return this.http.get(`http://localhost:8082/article/get-article?id=${id}`) as Observable<NewsletterArticle>
+    return this.http.get(`${this.envService.backendAddress}/article/get-article?id=${id}`) as Observable<NewsletterArticle>
   }
 
   addNewsletterArticle(postObject: NewsletterArticle) {
-    return this.http.post('http://localhost:8082/article', postObject) as Observable<NewsletterArticle>
+    return this.http.post(`${this.envService.backendAddress}/article`, postObject) as Observable<NewsletterArticle>
   }
 
 
@@ -52,7 +53,7 @@ export class NewsletterService {
     // console.log(result);
 
 
-    return this.http.post<NewsletterArticle>('http://localhost:8082/article/upload-image', formData);
+    return this.http.post<NewsletterArticle>(`${this.envService.backendAddress}/article/upload-image`, formData);
   }
 
   // getCoverImage(id: number): Observable<Blob> {
@@ -60,17 +61,17 @@ export class NewsletterService {
   // }
 
   getCoverImage(id:number): Observable<Blob> {
-    return this.http.get(`http://localhost:8082/article/get-image?id=${id}`, { responseType: 'blob' });
+    return this.http.get(`${this.envService.backendAddress}/article/get-image?id=${id}`, { responseType: 'blob' });
   }
 
   
   updateNewsletterArticle(postObject: NewsletterArticle) {
-    return this.http.post('http://localhost:8082/article', postObject) as Observable<NewsletterArticle>
+    return this.http.post(`${this.envService.backendAddress}/article`, postObject) as Observable<NewsletterArticle>
   }
 
   deleteNewsletterArticle(id: number) {
     const headers = new HttpHeaders();
       headers.set('Access-Control-Allow-Origin', 'application/json; charset=utf-8');
-      return this.http.delete(`http://localhost:8082/article?id=${id}`, {}) as Observable<{}>
+      return this.http.delete(`${this.envService.backendAddress}/article?id=${id}`, {}) as Observable<{}>
   }
 }

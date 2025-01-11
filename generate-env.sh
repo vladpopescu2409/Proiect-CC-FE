@@ -10,6 +10,8 @@ cat <<EOT > ./src/assets/env.js
     window.__env = window.__env || {};
     window.__env.authAddress = "$AUTH_ADDRESS";
     window.__env.backendAddress = "$BACKEND_ADDRESS";
+    window.__env.frontendAddress = "$FRONTEND_ADDRESS";
+
 })(this);
 EOT
 

@@ -3,6 +3,7 @@ import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@ang
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { finalize } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { EnvService } from 'src/app/services/env.service';
 
 //https://blog.angular-university.io/angular-file-upload/ - other option
 
@@ -14,7 +15,8 @@ import { Subscription } from 'rxjs';
 })
 export class FileUploadComponent  {
   constructor(
-    private http:HttpClient
+    private http:HttpClient,
+    private envService:EnvService
   ){}
  name: string ='';
  file: any;
@@ -30,7 +32,7 @@ export class FileUploadComponent  {
   formData.set ("name", this.name)
   formData.set("file",this.file)
   //submit this data in API - this is just a placeholder
-  this.http.post('http://localhost:8082/article/upload-image?id=${this}',formData).subscribe(
+  this.http.post(`${this.envService.backendAddress}/article/upload-image?id=${this}`,formData).subscribe(
     (response) => {});
 
  }
