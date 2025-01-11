@@ -10,6 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Params } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { EnvService } from 'src/app/services/env.service';
 
 @Component({
   selector: 'app-admin-users-table',
@@ -20,7 +21,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 export class AdminUsersTableComponent implements OnInit, OnDestroy {
 
-  constructor(private userService: UserService, private _liveAnnouncer: LiveAnnouncer, private route: ActivatedRoute, private router: Router) { }
+  constructor(private userService: UserService, private _liveAnnouncer: LiveAnnouncer, private route: ActivatedRoute, private router: Router,
+              private envService: EnvService
+  ) { }
 
   userSubscription: Subscription = new Subscription();
   
@@ -77,6 +80,8 @@ export class AdminUsersTableComponent implements OnInit, OnDestroy {
  
   ngOnInit(): void {
     this.getUsers();
+    console.log('Auth Address:', this.envService.authAddress);
+    console.log('Backend Address:', this.envService.backendAddress);
   }
 
 
