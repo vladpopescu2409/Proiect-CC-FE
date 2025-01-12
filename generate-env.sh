@@ -1,8 +1,9 @@
 #!/bin/bash
 
 # Variabile simulate (hardcoded)
-AUTH_ADDRESS="nicusor"
-BACKEND_ADDRESS="bujor"
+AUTH_ADDRESS="http://localhost:8080"
+BACKEND_ADDRESS="http://localhost:8082"
+FRONTEND_ADDRESS="http://localhost:4200"
 
 # Creează fișierul env.js cu variabilele
 cat <<EOT > ./src/assets/env.js

@@ -7,9 +7,9 @@
 
 <nav class="navbar navbar-expand-lg navbar-light">
   <div class="brand-container">
-    <a class="navbar-brand" href="frontendAddress + /newsfeed"><img src="../assets/images/connect-icon-svg.svg"
+    <a class="navbar-brand" [href]="frontendAddress + '/newsfeed'"><img src="../assets/images/connect-icon-svg.svg"
         width="34" height="34" /></a>
-    <a href="frontendAddress + /newsfeed" class="the-name-of-app">HR CONNECT</a>
+    <a [href]="frontendAddress + '/newsfeed'" class="the-name-of-app">HR CONNECT</a>
   </div>
   <!-- placeholder image -->
 
@@ -18,49 +18,49 @@
     <ul class="navbar-nav">
       <li class="nav-item">
         <div class="nav-icon-and-text">
-          <a class="nav-link-icon" id="style-2" href="frontendAddress + /newsfeed"><mat-icon>home</mat-icon></a>
+          <a class="nav-link-icon" id="style-2" [href]="frontendAddress + '/newsfeed'"><mat-icon>home</mat-icon></a>
 
-          <a class="nav-link" id="style-2" href="frontendAddress + /newsfeed">Home</a>
+          <a class="nav-link" id="style-2" [href]="frontendAddress + '/newsfeed'">Home</a>
         </div>
       </li>
 
       <li class="nav-item">
         <div class="nav-icon-and-text">
-          <a class="nav-link-icon" href="frontendAddress + /faq">
+          <a class="nav-link-icon" [href]="frontendAddress + '/faq'">
             <mat-icon>quiz</mat-icon>
           </a>
-          <a class="nav-link" href="frontendAddress + /faq">FAQ</a>
+          <a class="nav-link" [href]="frontendAddress + '/faq'">FAQ</a>
         </div>
 
         <!-- <a [routerLink]="['/profile']"class="nav-link" href="#">Profile</a> -->
       </li>
       <li class="nav-item">
         <div class="nav-icon-and-text">
-          <a class="nav-link-icon" href="frontendAddress + /benefits"> <mat-icon>loyalty</mat-icon></a>
-          <a class="nav-link" href="frontendAddress + /benefits">Benefits</a>
+          <a class="nav-link-icon" [href]="frontendAddress + '/benefits'"> <mat-icon>loyalty</mat-icon></a>
+          <a class="nav-link" [href]="frontendAddress + '/benefits'">Benefits</a>
         </div>
       </li>
 
 
       <li class="nav-item">
         <div class="nav-icon-and-text">
-          <a class="nav-link-icon" href="frontendAddress + /requests">
+          <a class="nav-link-icon" [href]="frontendAddress + '/requests'">
             <mat-icon>rate_review</mat-icon></a>
-          <a class="nav-link" href="frontendAddress + /requests">HR Requests</a>
+          <a class="nav-link" [href]="frontendAddress + '/requests'">HR Requests</a>
         </div>
       </li>
       <li class="nav-item">
         <div class="nav-icon-and-text">
-          <a class="nav-link-icon" href="frontendAddress + /feedback">
+          <a class="nav-link-icon" [href]="frontendAddress + '/feedback'">
             <mat-icon>difference</mat-icon></a>
-          <a class="nav-link" href="frontendAddress + /feedback">Feedback</a>
+          <a class="nav-link" [href]="frontendAddress + '/feedback'">Feedback</a>
         </div>
       </li>
       <li class="nav-item">
         <div class="nav-icon-and-text">
-          <a class="nav-link-icon" href="frontendAddress + /profile">
+          <a class="nav-link-icon" [href]="frontendAddress + '/profile'">
             <mat-icon>person_pin_circle</mat-icon></a>
-          <a class="nav-link" href="frontendAddress + /profile">User Details</a>
+          <a class="nav-link" [href]="frontendAddress + '/profile'">User Details</a>
         </div>
       </li>
     </ul>
